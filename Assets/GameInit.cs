@@ -1,14 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.DwarfTrain.Scripts.Train;
+using Assets.DwarfTrain.Scripts.Train.Motor;
 using Cinemachine;
 using Dreamteck;
 using Dreamteck.Forever;
 using Dreamteck.Splines;
+using TMPro;
 using UnityEngine;
 
 public class GameInit : MonoBehaviour
 {
+    public TextMeshProUGUI SpeedText;
+    public TextMeshProUGUI SlopeText;
+    public TextMeshProUGUI MotorText;
+
+
     public CarComponent EnginePrefab;
     public CarComponent WagonPrefab;
     
@@ -18,8 +26,10 @@ public class GameInit : MonoBehaviour
 
     public Transform Actors;
 
+    private TrainController _trainController;
 
-    private List<CarComponent> carComponents = new();
+    public int weightMultiplier;
+
 
     // Start is called before the first frame update
 
@@ -28,34 +38,58 @@ public class GameInit : MonoBehaviour
     }
     void Start()
     {
-        var distance = 3;
         levelGenerator.StartGeneration(() =>
+        
         {
-            MakeCar(10, EnginePrefab);
-            MakeCar(7.5f, WagonPrefab);
-            MakeCar(5.5f, WagonPrefab);
+            _trainController = new TrainController
+            {
+                Cars = new LinkedList<CarComponent>(),
+                TrackMotor = new BasicTrackMotor()
+                {
+                    AccelerationFactor = 0.2f,
+                    Power = 8f,
+                    MinVelocity = 0.1f,
+                    MaxVelocity = 10f,
+                    Traction = 0.1f,
+                }
+            };
+
+            weightMultiplier = 1;
+            var cars = 5;
+            var baseDistance = 7.5;
+            var distanceMod = -2;
+            _trainController.Cars.AddFirst(MakeCar(10, EnginePrefab, 3 * weightMultiplier));
+            for (var i = 0; i < cars; i++)
+            {
+                _trainController.Cars.AddLast(MakeCar((float)(baseDistance + distanceMod * i), WagonPrefab, 1 * weightMultiplier));
+            }
             
-            camera.Follow = carComponents.First().transform;
+            camera.Follow = _trainController.Cars.First().transform;
 
         });
             
     }
 
-    private void MakeCar(float distance, CarComponent CarComponentPrefab)
+    private CarComponent MakeCar(float distance, CarComponent CarComponentPrefab, float weight)
     {
         var carComponent = Instantiate(CarComponentPrefab);
         carComponent.splineTracer.spline = SplineComputer;
-        carComponent.AttachedTo = carComponents.LastOrDefault();
-        carComponents.Add(carComponent);
-
-        carComponent.Initialize(distance);
+  
+        carComponent.Initialize(distance, weight);
 
         carComponent.transform.SetParent(Actors);
+        
+        return carComponent;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        _trainController?.Update(Time.deltaTime, 0.1f);
+
+        SpeedText.text = $"Speed " + _trainController?.Velocity.ToString("#.##");
+        SlopeText.text = "Slope " + _trainController?.SlopeAngle.ToString("#.##");
+        MotorText.text = _trainController?.TrackMotor?.ToString();
+
     }
 }

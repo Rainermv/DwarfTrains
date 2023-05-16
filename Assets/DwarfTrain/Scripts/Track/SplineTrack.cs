@@ -1,16 +1,16 @@
-using Dreamteck.Forever;
+using Dreamteck.Splines;
 using UnityEngine;
 
-namespace Assets.DwarfTrain.Scripts
+namespace Assets.DwarfTrain.Scripts.Track
 {
-    public class GenScript : MonoBehaviour
+    public class SplineTrack : MonoBehaviour
     {
-        public LevelGenerator levelGenerator;
+        public SplineComputer computer;
 
         // Start is called before the first frame update
         void Start()
         {
-            //levelGenerator.Eva
+        
         }
 
         // Update is called once per frame

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3641603374273200477}
   - component: {fileID: 3641603374273200466}
   m_Layer: 0
-  m_Name: Car
+  m_Name: Locomotive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -196,10 +196,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 903146b52f5917d48a8b74b2f2edf5df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttachedTo: {fileID: 0}
+  AttachedFront: {fileID: 0}
+  AttachedRear: {fileID: 0}
   TrackCaster: {fileID: 3641603374683813558}
   splineTracer: {fileID: 3641603374273200476}
-  Speed: 0
+  CarWeight: 2
 --- !u!1 &3641603374683813556
 GameObject:
   m_ObjectHideFlags: 0

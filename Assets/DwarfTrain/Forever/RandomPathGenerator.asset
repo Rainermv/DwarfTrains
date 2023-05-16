@@ -78,11 +78,11 @@ MonoBehaviour:
   useColors: 1
   useSizes: 0
   minOrientation: {x: 0, y: 0, z: 0}
-  maxOrientation: {x: 60, y: 0, z: 0}
+  maxOrientation: {x: 90, y: 0, z: 0}
   minRandomStep: {x: 0, y: 0, z: 0}
   maxRandomStep: {x: 45, y: 0, z: 0}
   minTurnRate: {x: 0, y: 0, z: 0}
-  maxTurnRate: {x: 30, y: 0, z: 0}
+  maxTurnRate: {x: 45, y: 0, z: 0}
   startTargetOrientation: {x: 0, y: 0, z: 0}
   useStartPitchTarget: 1
   useStartYawTarget: 0

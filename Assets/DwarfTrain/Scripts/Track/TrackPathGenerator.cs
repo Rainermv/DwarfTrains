@@ -1,7 +1,7 @@
 ﻿using Dreamteck.Forever;
 using UnityEngine;
 
-namespace Assets.DwarfTrain.Scripts
+namespace Assets.DwarfTrain.Scripts.Track
 {
     public class TrackPathGenerator : HighLevelPathGenerator
     {
