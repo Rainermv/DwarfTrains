@@ -20,7 +20,7 @@ namespace Assets.DwarfTrain.Tests
         public void CalculateSlopeCoeficientTest(float slopeAngle, float minAngle, float maxAngle, float expected,
             float maxDescendingAngleNormalizedValue, float maxAscendingAngleNormalizedValue)
         {
-            var slopeFactor = BasicTrackMotor.CalculateSlopeCoeficient(slopeAngle, minAngle, maxAngle,  maxDescendingAngleNormalizedValue,  maxAscendingAngleNormalizedValue);
+            var slopeFactor = BasicTrainMotor.CalculateSlopeCoeficient(slopeAngle, minAngle, maxAngle,  maxDescendingAngleNormalizedValue,  maxAscendingAngleNormalizedValue);
             Assert.AreEqual(expected, slopeFactor);
             // Use the Assert class to test conditions
         }
@@ -30,7 +30,7 @@ namespace Assets.DwarfTrain.Tests
         [TestCase(5F, 10F, 0.5F)]
         public void CalculateMotorForceTest(float power, float weight, float expected)
         {
-            var result = BasicTrackMotor.CalculateMotorForce(power, weight);
+            var result = BasicTrainMotor.CalculateMotorForce(power, weight);
             Assert.AreEqual(expected, result);
 
         }
@@ -49,7 +49,7 @@ namespace Assets.DwarfTrain.Tests
         public void CalculateSlopeModifierTest(float weight, float slopeCoeficient, 
             float traction, double expected)
         {
-            var result = BasicTrackMotor.CalculateSlopeModifier(slopeCoeficient, weight, traction);
+            var result = BasicTrainMotor.CalculateSlopeModifier(slopeCoeficient, weight, traction);
             Assert.AreEqual(expected, result);
 
         }
